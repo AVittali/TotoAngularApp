@@ -3,36 +3,44 @@
    <ng-container *ngIf="myData|async;let templateData">
       <mat-expansion-panel *ngFor="let data of templateData">
          <mat-expansion-panel-header>
-            <mat-panel-title>
-               {{ data.datum }} {{ data.status }}
+            <mat-panel-title [ngStyle]="getStatusStyle(data.status)">
+               {{ data.datum | date:'dd.MM.yyyy'}} - {{ data.status }}
             </mat-panel-title>
-            <div>
-               <div>Einsatz: {{ data.gesamtEinsatz }} </div>
-               <div>Quote : {{ data.quote }}</div>
+            <div class="grid-container">
+               <div class="label">Von</div>
+               <div class="data">{{ data.von }}</div>
+               <div class="label">Quote</div>
+               <div class="data">{{ data.quote }}</div>
             </div>
          </mat-expansion-panel-header>
          <div class="panel-content">
-            <ul>
-               <ng-container *ngFor="let position of data.wettposition">
+            <div class="grid-container">
+               <div class="label">Einsatz</div>
+               <div class="data">{{ data.gesamtEinsatz }}</div>
+               <div class="label">Gewinn</div>
+               <div class="data">{{ data.ausgezahlterBetrag }}</div>
+            </div>
+            <ng-container *ngFor="let position of data.wettposition">
+               <mat-card>
+                  <mat-card-title class="paarung">{{position.heimmannschaft}} - {{position.gastmannschaft}}
+                     <ng-container *ngIf="position.endstand">
+                        {{ position.endstand }} ({{ position.halbzeit }})
+                     </ng-container>
+                  </mat-card-title>
                   <mat-card>
-                     <mat-card-subtitle>{{position.heimmannschaft}} - {{position.gastmannschaft}}
-                        <ng-container *ngIf="position.endstand">
-                           {{ position.endstand }} ({{ position.halbzeit }})
-                        </ng-container>
-                     </mat-card-subtitle>
-                     <mat-card>
-                        <mat-card-content class="grid-container">
-                           <div class="label">Quote</div>
-                           <div class="data">{{ position.quote }}</div>
-                           <div class="label">Tipp</div>
-                           <div class="data">{{ position.tipp }}</div>
-                           <div class="label">Ergebnis</div>
-                           <div class="data">{{ position.ergebnis }}</div>
-                        </mat-card-content>
-                     </mat-card>
+                     <mat-card-content class="grid-container">
+                        <div class="label">Quote</div>
+                        <div class="data">{{ position.quote }}</div>
+                        <div class="label">Tipp</div>
+                        <div class="data">{{ position.tipp }}</div>
+                        <div class="label">Ergebnis</div>
+                        <div class="data">{{ position.ergebnis }}</div>
+                        <div class="label" *ngIf="position.bemerkung">Bemerkung</div>
+                        <div class="data">{{ position.bemerkung }}</div>
+                     </mat-card-content>
                   </mat-card>
-               </ng-container>
-            </ul>
+               </mat-card>
+            </ng-container>
          </div>
       </mat-expansion-panel>
    </ng-container>

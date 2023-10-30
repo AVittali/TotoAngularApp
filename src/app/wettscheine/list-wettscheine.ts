@@ -50,4 +50,14 @@ export class ListWettscheine implements OnInit {
     console.log({ "ListWettscheine": this.wettscheine })
   }
 
+  getStatusStyle(status: string): any {
+    if (status === 'GEWONNEN') {
+      return { color: 'green' };
+    } else if (status === 'VERLOREN') {
+      return { color: 'red' };
+    } else {
+      return {}; // Standard-Stil oder leeres Objekt für Standardfarbe
+    }
+  }
+
 }

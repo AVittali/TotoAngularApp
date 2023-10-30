@@ -11,6 +11,12 @@
     color: white;
 }
 
+.paarung {
+    font-size: 16px;
+    background-color: #3F51B5;
+    color: white;
+    padding-left: 10px;
+}
 
 .grid-container {
     display: grid;
@@ -22,6 +28,7 @@
     grid-gap: 2px;
     /* Erhöhter Abstand zwischen den Spalten */
     grid-column-gap: 20px;
+    padding: 10px;
 }
 
 .label {
