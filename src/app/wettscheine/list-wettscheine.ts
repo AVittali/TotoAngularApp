@@ -6,9 +6,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatCardModule } from '@angular/material/card';
 import { WettscheineJsonReader } from '../api/wettscheine-json-reader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { MatTableModule } from '@angular/material/table'
 
 @Component({
   selector: 'list-wettscheine',
@@ -23,6 +25,8 @@ import { CommonModule } from '@angular/common';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatCardModule,
+    MatTableModule,
     HttpClientModule,
     CommonModule
   ],
@@ -31,6 +35,8 @@ export class ListWettscheine implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
   public myData = this.http.get<any[]>('https://raw.githubusercontent.com/AVittali/TotoData/main/Wettscheine.json');
+
+  displayedColumns: string[] = ['spalte1', 'spalte2'];
 
   wettscheine: any[] = [];
 

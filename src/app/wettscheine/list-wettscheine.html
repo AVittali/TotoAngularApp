@@ -1,3 +1,4 @@
+<div class="header">Aktuelle Wettscheine</div>
 <mat-accordion>
    <ng-container *ngIf="myData|async;let templateData">
       <mat-expansion-panel *ngFor="let data of templateData">
@@ -5,32 +6,31 @@
             <mat-panel-title>
                {{ data.datum }} {{ data.status }}
             </mat-panel-title>
-            <!--
-            <mat-panel-description>
-               
-            </mat-panel-description>
-            -->
             <div>
                <div>Einsatz: {{ data.gesamtEinsatz }} </div>
                <div>Quote : {{ data.quote }}</div>
             </div>
          </mat-expansion-panel-header>
          <div class="panel-content">
-            <!-- Hier können Sie weitere Informationen aus dem JSON-Objekt anzeigen -->
             <ul>
                <ng-container *ngFor="let position of data.wettposition">
-                  <div>{{position.heimmannschaft}} - {{position.gastmannschaft}} {{ position.endstand }}
-                     ({{position.halbzeit }})</div>
-                  ({{ position.wettbewerb }})
-                  <div>Tipp: {{ position.tipp }}</div>
-                  <div>Ergebnis: {{ position.ergebnis }}</div>
-                  <!--
-                  <mat-form-field>
-                     <mat-label>Tipp</mat-label>
-                     <input matInput id="pause" type="number" formControlName="pause" />
-                  </mat-form-field>
-                  -->
-                  <hr>
+                  <mat-card>
+                     <mat-card-subtitle>{{position.heimmannschaft}} - {{position.gastmannschaft}}
+                        <ng-container *ngIf="position.endstand">
+                           {{ position.endstand }} ({{ position.halbzeit }})
+                        </ng-container>
+                     </mat-card-subtitle>
+                     <mat-card>
+                        <mat-card-content class="grid-container">
+                           <div class="label">Quote</div>
+                           <div class="data">{{ position.quote }}</div>
+                           <div class="label">Tipp</div>
+                           <div class="data">{{ position.tipp }}</div>
+                           <div class="label">Ergebnis</div>
+                           <div class="data">{{ position.ergebnis }}</div>
+                        </mat-card-content>
+                     </mat-card>
+                  </mat-card>
                </ng-container>
             </ul>
          </div>
@@ -38,69 +38,3 @@
    </ng-container>
 
 </mat-accordion>
-
-
-<!--
-<div class="example-action-buttons">
-   <button mat-button (click)="accordion.openAll()">Expand All</button>
-   <button mat-button (click)="accordion.closeAll()">Collapse All</button>
-</div>
-<mat-accordion class="example-headers-align" multi>
-   <mat-expansion-panel>
-      <mat-expansion-panel-header>
-         <mat-panel-title>
-            Personal data
-         </mat-panel-title>
-         <mat-panel-description>
-            Type your name and age
-            <mat-icon>account_circle</mat-icon>
-         </mat-panel-description>
-      </mat-expansion-panel-header>
-
-      <mat-form-field>
-         <mat-label>First name</mat-label>
-         <input matInput>
-      </mat-form-field>
-
-      <mat-form-field>
-         <mat-label>Age</mat-label>
-         <input matInput type="number" min="1">
-      </mat-form-field>
-
-   </mat-expansion-panel>
-   <mat-expansion-panel disabled>
-      <mat-expansion-panel-header>
-         <mat-panel-title>
-            Destination
-         </mat-panel-title>
-         <mat-panel-description>
-            Type the country name
-            <mat-icon>map</mat-icon>
-         </mat-panel-description>
-      </mat-expansion-panel-header>
-
-      <mat-form-field>
-         <mat-label>Country</mat-label>
-         <input matInput>
-      </mat-form-field>
-   </mat-expansion-panel>
-
-   <mat-expansion-panel>
-      <mat-expansion-panel-header>
-         <mat-panel-title>
-            Day of the trip
-         </mat-panel-title>
-         <mat-panel-description>
-            Inform the date you wish to travel
-            <mat-icon>date_range</mat-icon>
-         </mat-panel-description>
-      </mat-expansion-panel-header>
-
-      <mat-form-field>
-         <mat-label>Date</mat-label>
-         <input matInput [matDatepicker]="picker" (focus)="picker.open()" readonly>
-      </mat-form-field>
-      <mat-datepicker #picker></mat-datepicker>
-   </mat-expansion-panel>
-</mat-accordion>
--->
