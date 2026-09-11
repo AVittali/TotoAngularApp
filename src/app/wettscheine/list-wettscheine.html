@@ -38,8 +38,10 @@
                         <div class="label">Tipp</div>
                         <div class="data">{{ position.tipp }}</div>
                         <ng-container *ngIf="position.ergebnis">
-                           <div class="label">Ergebnis</div>
-                           <div class="data">{{ position.ergebnis }}</div>
+                           <div class="label" [ngStyle]="getErgebnisStyle(position.tipp, position.ergebnis)">Ergebnis
+                           </div>
+                           <div class="data" [ngStyle]="getErgebnisStyle(position.tipp, position.ergebnis)">{{
+                              position.ergebnis }}</div>
                         </ng-container>
                         <ng-container *ngIf="position.bemerkung">
                            <div class="label">Bemerkung</div>

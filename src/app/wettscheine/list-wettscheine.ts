@@ -53,7 +53,17 @@ export class ListWettscheine implements OnInit {
   getStatusStyle(status: string): any {
     if (status === 'GEWONNEN') {
       return { color: 'green' };
-    } else if (status === 'VERLOREN') {
+    } else if (status === 'OFFEN') {
+      return { color: 'blue' };
+    } else {
+      return {}; // Standard-Stil oder leeres Objekt für Standardfarbe
+    }
+  }
+
+  getErgebnisStyle(tipp: string, ergebnis: string): any {
+    if (tipp === ergebnis) {
+      return { color: 'green' };
+    } else if (tipp !== ergebnis) {
       return { color: 'red' };
     } else {
       return {}; // Standard-Stil oder leeres Objekt für Standardfarbe
